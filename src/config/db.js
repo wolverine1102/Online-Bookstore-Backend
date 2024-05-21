@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const seedAdmin = require('../seed/seedAdmin');
-const Book = require('../models/book.js');
 
 dotenv.config();
 
