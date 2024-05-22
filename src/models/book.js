@@ -22,13 +22,13 @@ const BookSchema = new mongoose.Schema({
         default: ""
     },
     pages: {
-        type: Number
+        type: Number,
     },
     publisher: {
-        type: String
+        type: String,
     },
     language: {
-        type: String
+        type: String,
     },
 });
 
