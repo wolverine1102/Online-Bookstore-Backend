@@ -3,15 +3,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const token = require('../middlewares/token');
 
-const validateUser = async function (password, hash) {
-    await bcrypt.compare(password, hash)
-        .then((result) => {
-            return result;
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-}
 
 const register = async function (req, res) {
     try {
@@ -94,9 +85,10 @@ const login = async function (req, res) {
         }
 
         await User.findOne({ email: email })
-            .then((user) => {
+            .then(async (user) => {
                 if (user) {
-                    if (validateUser(password, user.password)) {
+                    const validUser = await bcrypt.compare(password, user.password);
+                    if (validUser) {
                         res.status(200).json({
                             success: true,
                             data: {
